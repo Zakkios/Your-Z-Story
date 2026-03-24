@@ -1,14 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { getChapter, makeChoice } from '../controllers/introController.js';
+
 const router = express.Router();
 
-const {
-    getWelcomeMessage,
-    getEnemy,
-    makeChoice
-} = require('../controllers/choiceController');
-
-router.get('/', getWelcomeMessage);
-router.get('/enemy', getEnemy);
+router.get('/chapter', getChapter);
 router.post('/choice', makeChoice);
 
-module.exports = router;
+export default router;
