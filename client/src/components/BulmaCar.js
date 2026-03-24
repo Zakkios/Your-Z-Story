@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { getEnemy, sendChoice } from '../services/api';
+import { useState, useEffect } from 'react';
+import { getChapter, sendChoice } from '../services/api';
 
-const FirstChoice = () => {
-    const [enemy, setEnemy] = useState(null);
+const BulmaCar = () => {
+    const [chapter, setChapter] = useState(null);
     const [hasChosen, setHasChosen] = useState(false);
     const [result, setResult] = useState(null);
 
     useEffect(() => {
-        const fetchEnemy = async () => {
+        const fetchChapter = async () => {
             try {
-                const data = await getEnemy();
-                setEnemy(data.enemy ?? null);
+                const data = await getChapter();
+                setChapter(data.chapter ?? null);
             } catch (error) {
-                console.error('Error fetching enemy:', error);
-                setEnemy(null);
+                console.error('Error fetching chapter:', error);
+                setChapter(null);
             }
         };
 
-        fetchEnemy();
+        fetchChapter();
     }, []);
 
     const handleChoice = async (choice) => {
@@ -33,10 +33,10 @@ const FirstChoice = () => {
 
     return (
         <>
-            <h1 className="text-3xl font-bold p-4">Bienvenue dans Your Dragon Story</h1>
+            <h1 className="text-3xl font-bold p-4">Bienvenue dans Your Z Story</h1>
 
             <h2 className="text-xl font-semibold p-2 text-red-500">
-                {enemy ? `${enemy} apparaît !` : 'Aucun ennemi en vue.'}
+                {chapter ? `${chapter.title}` : 'Aucun chapitre en vue.'}
             </h2>
 
             <h3 className="text-lg font-medium p-2">Faites un choix</h3>
@@ -64,4 +64,4 @@ const FirstChoice = () => {
     );
 };
 
-export default FirstChoice;
+export default BulmaCar;
