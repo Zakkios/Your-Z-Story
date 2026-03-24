@@ -1,10 +1,10 @@
 import './App.css';
-import FirstChoice from './components/FirstChoice';
+import GamePage from './pages/GamePage';
 
 function App() {
   return (
     <div className="App">
-      <FirstChoice />
+      <GamePage />
     </div>
   );
 }
