@@ -1,27 +1,45 @@
-import { useState } from 'react';
-import BulmaCar from '../components/BulmaCar';
-import Intro from '../components/Intro';
-import { sendChoice } from '../services/api';
+import { useEffect, useState } from 'react';
+import { fetchScene, sendChoice } from '../services/api';
+import SceneRenderer from '../components/SceneRenderer';
 
 const GamePage = () => {
-    const [gameStarted, setGameStarted] = useState(false);
+    const [gameState, setGameState] = useState(null);
 
-    const startGame = () => {
-        setGameStarted(true);
-        try {
-            sendChoice("1");
-        } catch (error) {
-            console.error('Error starting game:', error);
-            alert('Une erreur est survenue lors du démarrage du jeu. Veuillez réessayer.');
-        }
+    useEffect(() => {
+        const load = async () => {
+            const data = await fetchScene("chapter0", "intro");
+            setGameState(data);
+        };
+
+        load();
+    }, []);
+
+    const handleChoice = async (choiceId) => {
+        const choice = gameState.choices[choiceId];
+        const payload = {
+            chapterId: choice.nextChapterId,
+            sceneId: choice.nextSceneId,
+            choiceId
+        };
+        setGameState(null)
+        console.log("Sending choice:", payload);
+
+        const nextState = await sendChoice(payload);
+        console.log("Received next state:", nextState);
+        setGameState(nextState);
     };
 
+    if (!gameState) {
+        return <div>Chargement...</div>;
+    }
+
     return (
-        <div>
-            {gameStarted ? null : <Intro startGame={startGame} />}
-            {gameStarted && <BulmaCar />}
-        </div>
+        <SceneRenderer
+            scene={gameState}
+            onChoice={handleChoice}
+        />
     );
 };
 
 export default GamePage;
+
