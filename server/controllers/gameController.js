@@ -16,9 +16,12 @@ export const gameState = (req, res) => {
 }
 
 export const makeChoice = (req, res) => {
-    const { choice } = req.body;
-    // Logique de traitement du choix
-    console.log(`Choice made: ${choice}`);
-    // Pour l'instant, on retourne une réponse générique
-    return res.json({ message: 'Choice received', choice });
+    const choice = req.body;
+    const newScene = gameData.chapters[choice.chapterId].scenes[choice.sceneId];
+
+    if (!newScene) {
+        return res.status(404).json({ error: 'Next scene not found' });
+    }
+
+    return res.json(newScene);
 }
