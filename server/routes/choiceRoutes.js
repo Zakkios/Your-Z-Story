@@ -1,9 +1,9 @@
 import express from 'express';
-import { getChapter, makeChoice } from '../controllers/introController.js';
+import { getScene, makeChoice } from '../controllers/gameController.js';
 
 const router = express.Router();
 
-router.get('/chapter', getChapter);
+router.get('/chapter/:chapterId/scene/:sceneId', getScene);
 router.post('/choice', makeChoice);
 
 export default router;
