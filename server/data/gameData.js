@@ -1,9 +1,9 @@
-import intro from "./chapters/intro.js"
+import chapter0 from "./chapters/chapter0.js"
 import chapter1 from "./chapters/chapter1.js"
 
 const gameData = {
     chapters: {
-        intro,
+        ...chapter0,
         ...chapter1
     }
 }
