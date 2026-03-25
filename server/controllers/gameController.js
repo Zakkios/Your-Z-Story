@@ -1,6 +1,6 @@
 import gameData from '../data/gameData.js';
 
-export const getScene = (req, res) => {
+export const gameState = (req, res) => {
     const { chapterId, sceneId } = req.params;
     const chapter = gameData.chapters[chapterId];
 
