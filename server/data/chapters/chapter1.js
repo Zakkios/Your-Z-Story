@@ -29,13 +29,13 @@ const chapter1 = {
             ],
             choices: [
                 {
-                    id: "1",
+                    id: "0",
                     text: "Affronter la voiture pour protéger mon poisson",
                     nextChapterId: "chapter1",
                     nextSceneId: "carFight"
                 },
                 {
-                    id: "2",
+                    id: "1",
                     text: "Prendre la fuite pour sauver mon poisson",
                     nextChapterId: "chapter1",
                     nextSceneId: "carRun"
@@ -49,7 +49,7 @@ const chapter1 = {
             status: "win",
             choices: [
                 {
-                    id: "1",
+                    id: "0",
                     text: "Continuer l’aventure",
                     nextChapterId: "chapter2",
                     nextSceneId: "nextChapter"
@@ -63,7 +63,7 @@ const chapter1 = {
             status: "lose",
             choices: [
                 {
-                    id: "1",
+                    id: "0",
                     text: "Recommencer le chapitre",
                     nextChapterId: "chapter1",
                     nextSceneId: "bulmaCar"
