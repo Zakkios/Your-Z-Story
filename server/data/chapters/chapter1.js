@@ -9,22 +9,26 @@ const chapter1 = {
                 {
                     id: "shot1",
                     image: "/images/chapter1/bulma-car/1.png",
-                    animation: "swipe-right"
+                    animation: "engine-vibration",
+                    transition: ""
                 },
                 {
                     id: "shot2",
                     image: "/images/chapter1/bulma-car/2.png",
-                    animation: "swipe-left"
+                    animation: "",
+                    transition: ""
                 },
                 {
                     id: "shot3",
                     image: "/images/chapter1/bulma-car/3.png",
-                    animation: "swipe-right"
+                    animation: "danger-pulse",
+                    transition: ""
                 },
                 {
                     id: "shot4",
                     image: "/images/chapter1/bulma-car/4.png",
-                    animation: "swipe-left"
+                    animation: "",
+                    transition: "slide-left"
                 }
             ],
             choices: [
