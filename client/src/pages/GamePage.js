@@ -22,10 +22,7 @@ const GamePage = () => {
             choiceId
         };
         setGameState(null)
-        console.log("Sending choice:", payload);
-
         const nextState = await sendChoice(payload);
-        console.log("Received next state:", nextState);
         setGameState(nextState);
     };
 
