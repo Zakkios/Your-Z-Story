@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import { fetchScene, sendChoice } from '../services/api';
 import SceneRenderer from '../components/SceneRenderer';
+import GameOverSceneRenderer from '../components/GameOverSceneRenderer';
 
 const GamePage = () => {
     const [gameState, setGameState] = useState(null);
+    const [isGameOver, setIsGameOver] = useState(false);
 
     useEffect(() => {
         const load = async () => {
             const data = await fetchScene("chapter0", "intro");
             setGameState(data);
+            setIsGameOver(data.status === "gameover");
         };
 
         load();
@@ -24,6 +27,8 @@ const GamePage = () => {
         setGameState(null)
         const nextState = await sendChoice(payload);
         setGameState(nextState);
+        console.log("Next state:", nextState);
+        setIsGameOver(nextState.status === "gameover");
     };
 
     if (!gameState) {
@@ -31,10 +36,19 @@ const GamePage = () => {
     }
 
     return (
-        <SceneRenderer
-            scene={gameState}
-            onChoice={handleChoice}
-        />
+        <>
+            {isGameOver ? (
+                <GameOverSceneRenderer
+                    scene={gameState}
+                    onChoice={handleChoice}
+                />
+            ) : (
+                <SceneRenderer
+                    scene={gameState}
+                    onChoice={handleChoice}
+                />
+            )}
+        </>
     );
 };
 
