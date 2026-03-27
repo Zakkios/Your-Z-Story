@@ -5,6 +5,7 @@ const chapter1 = {
             id: "bulmaCar",
             title: "Une voiture approche !",
             text: "C'est quoi ce monstre ?! Il veut voler mon poisson c'est ça ?!",
+            status: "ongoing",
             shots: [
                 {
                     id: "shot1",
@@ -50,7 +51,8 @@ const chapter1 = {
             id: "carFight",
             title: "Tu as choisi d'affronter la voiture !",
             text: "Tu affrontes la voiture et tu gagnes !",
-            status: "win",
+            status: "ongoing",
+            shots: [],
             choices: [
                 {
                     id: "0",
@@ -63,14 +65,28 @@ const chapter1 = {
         carRun: {
             id: "carRun",
             title: "Tu as choisi de prendre la fuite !",
-            text: "Tu prends la fuite et tu sauves ton poisson !",
-            status: "lose",
+            text: "Tu prends la fuite et te cache dans la montagne. Mais en rentrant chez toi, tu ne retrouve pas la dragon ball de grand-père... Impossible de retrouver cette voleuse...",
+            status: "gameover",
+            shots: [
+                {
+                    id: "shot1",
+                    image: "/images/chapter1/car-run/1.png",
+                    animation: "",
+                    transition: ""
+                }
+            ],
             choices: [
                 {
                     id: "0",
                     text: "Recommencer le chapitre",
                     nextChapterId: "chapter1",
                     nextSceneId: "bulmaCar"
+                },
+                {
+                    id: "1",
+                    text: "Abandonner et retourner à l'écran titre",
+                    nextChapterId: "chapter0",
+                    nextSceneId: "intro"
                 }
             ]
         }
