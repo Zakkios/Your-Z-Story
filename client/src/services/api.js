@@ -9,7 +9,13 @@ export const fetchScene = async (chapterId, sceneId) => {
         throw new Error("Failed to fetch scene");
     }
 
-    return response.json();
+    const responseJson = await response.json();
+    const codeStatus = response.status;
+
+    return {
+        scene: responseJson,
+        status: codeStatus
+    };
 };
 
 export const sendChoice = async (payload) => {
@@ -25,5 +31,11 @@ export const sendChoice = async (payload) => {
         throw new Error("Failed to send choice");
     }
 
-    return response.json();
+    const responseJson = await response.json();
+    const codeStatus = response.status;
+
+    return {
+        scene: responseJson,
+        status: codeStatus
+    };
 };
