@@ -52,7 +52,32 @@ const chapter1 = {
             title: "Tu as choisi d'affronter la voiture !",
             text: "Tu affrontes la voiture et tu gagnes !",
             status: "ongoing",
-            shots: [],
+            shots: [
+                {
+                    id: "shot1",
+                    image: "/images/chapter1/car-fight/1.png",
+                    animation: "danger-pulse",
+                    transition: ""
+                },
+                {
+                    id: "shot2",
+                    image: "/images/chapter1/car-fight/2.png",
+                    animation: "engine-vibration",
+                    transition: ""
+                },
+                {
+                    id: "shot3",
+                    image: "/images/chapter1/car-fight/3.png",
+                    animation: "",
+                    transition: ""
+                },
+                {
+                    id: "shot4",
+                    image: "/images/chapter1/car-fight/4.png",
+                    animation: "",
+                    transition: "slide-left"
+                }
+            ],
             choices: [
                 {
                     id: "0",
