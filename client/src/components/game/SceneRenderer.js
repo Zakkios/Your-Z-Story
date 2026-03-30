@@ -16,6 +16,11 @@ const SceneRenderer = ({ scene, onChoice }) => {
         setCurrentShotIndex((prev) => prev + 1);
     };
 
+    const handlePrevious = () => {
+        if (!hasShots) return;
+        setCurrentShotIndex((prev) => Math.max(prev - 1, 0));
+    }
+
     const displayedShot = areShotsFinished
         ? shots[shots.length - 1]
         : shots[currentShotIndex];
@@ -37,7 +42,7 @@ const SceneRenderer = ({ scene, onChoice }) => {
                     >
                         <div
                             className={`
-                    w-full flex justify-center items-center
+                    w-full flex flex-col justify-center items-center
                     transition-all duration-500 ease-in-out
                     ${displayedShot.transition || ""}
                 `}
@@ -78,14 +83,24 @@ const SceneRenderer = ({ scene, onChoice }) => {
 
             {
                 !areShotsFinished && (
-                    <div className="absolute bottom-20 right-20">
-                        <button
-                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                            onClick={handleNext}
-                        >
-                            Next
-                        </button>
-                    </div>
+                    <>
+                        <div className="absolute bottom-20 right-20">
+                            <button
+                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                onClick={handleNext}
+                            >
+                                Next
+                            </button>
+                        </div>
+                        <div className="absolute bottom-20 left-20">
+                            <button
+                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                onClick={handlePrevious}
+                            >
+                                Previous
+                            </button>
+                        </div>
+                    </>
                 )
             }
         </div >
