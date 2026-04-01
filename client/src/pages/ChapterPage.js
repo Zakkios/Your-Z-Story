@@ -1,9 +1,11 @@
-import useGame from '../hooks/useGame';
-import SceneRenderer from '../components/game/SceneRenderer';
-import GameOverSceneRenderer from '../components/game/GameOverSceneRenderer';
+import { useParams } from "react-router-dom";
+import useGame from "../hooks/useGame";
+import GameOverSceneRenderer from "../components/game/GameOverSceneRenderer";
+import SceneRenderer from "../components/game/SceneRenderer";
 
-const GamePage = () => {
-    const { gameState, isGameOver, error, handleChoice } = useGame();
+const ChapterPage = () => {
+    const { chapterId } = useParams();
+    const { gameState, isGameOver, error, handleChoice } = useGame({ chapterId });
 
     if (error) {
         return <div className="text-red-500">{error}</div>;
@@ -30,4 +32,4 @@ const GamePage = () => {
     );
 };
 
-export default GamePage;
+export default ChapterPage;
