@@ -7,7 +7,8 @@ export const gameState = (req, res) => {
     if (!chapter) {
         return res.status(404).json({ error: 'Chapter not found' });
     }
-    const scene = chapter.scenes[sceneId];
+
+    const scene = chapter.scenes[sceneId] || chapter.scenes[chapter.startSceneId];
 
     if (!scene) {
         return res.status(404).json({ error: 'Scene not found' });
