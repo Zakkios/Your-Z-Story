@@ -5,7 +5,7 @@ import SceneRenderer from "../components/game/SceneRenderer";
 
 const ChapterPage = () => {
     const { chapterId } = useParams();
-    const { gameState, isGameOver, error, handleChoice } = useGame({ chapterId });
+    const { gameState, isGameOver, error, handleChoice, restartCurrentChapter } = useGame({ chapterId });
 
     if (error) {
         return <div className="text-red-500">{error}</div>;
@@ -20,7 +20,7 @@ const ChapterPage = () => {
             {isGameOver ? (
                 <GameOverSceneRenderer
                     scene={gameState}
-                    onChoice={handleChoice}
+                    restartCurrentChapter={restartCurrentChapter}
                 />
             ) : (
                 <SceneRenderer

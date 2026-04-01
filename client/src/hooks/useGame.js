@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { fetchScene, sendChoice } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,29 +8,35 @@ const useGame = ({ chapterId, sceneId = null }) => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const load = async () => {
-            try {
-                const data = await fetchScene(chapterId, sceneId);
-                if (!data || data.status !== 200) {
-                    setError("Erreur lors du chargement de la scène. Veuillez réessayer plus tard.");
-                    return;
-                }
-                console.log("Fetched scene data:", data);
-                const scene = data.scene;
-                setGameState(scene);
-                setIsGameOver(scene?.status === "gameover");
-            } catch (err) {
-                console.error("Error fetching initial scene:", err);
-                setError("Erreur lors du chargement de la scène. Veuillez réessayer plus tard.");
-            }
-        };
+    const load = useCallback(async () => {
+        try {
+            setError(null);
+            setGameState(null);
+            setIsGameOver(false);
 
-        load();
+            const data = await fetchScene(chapterId, sceneId);
+
+            if (!data || data.status !== 200) {
+                setError("Erreur lors du chargement de la scène. Veuillez réessayer plus tard.");
+                return;
+            }
+
+            const scene = data.scene;
+            setGameState(scene);
+            setIsGameOver(scene?.status === "gameover");
+        } catch (err) {
+            console.error("Error fetching initial scene:", err);
+            setError("Erreur lors du chargement de la scène. Veuillez réessayer plus tard.");
+        }
     }, [chapterId, sceneId]);
 
+    useEffect(() => {
+        load();
+    }, [load]);
+
     const handleChoice = async (choiceId) => {
-        const choice = gameState.choices.find((choice) => choice.id === choiceId);
+        const choice = gameState?.choices?.find((choice) => choice.id === choiceId);
+
         if (!choice) {
             setError("Une erreur s'est produite lors du traitement de votre choix. Veuillez réessayer plus tard.");
             return;
@@ -46,13 +52,18 @@ const useGame = ({ chapterId, sceneId = null }) => {
             sceneId: choice.nextSceneId,
             choiceId
         };
-        setGameState(null);
+
         try {
+            setError(null);
+            setGameState(null);
+
             const data = await sendChoice(payload);
+
             if (!data || data.status !== 200) {
                 setError("Erreur lors du chargement de la scène. Veuillez réessayer plus tard.");
                 return;
             }
+
             const scene = data.scene;
             setGameState(scene);
             setIsGameOver(scene?.status === "gameover");
@@ -62,7 +73,11 @@ const useGame = ({ chapterId, sceneId = null }) => {
         }
     };
 
-    return { gameState, isGameOver, error, handleChoice };
+    const restartCurrentChapter = async () => {
+        await load();
+    };
+
+    return { gameState, isGameOver, error, handleChoice, restartCurrentChapter };
 };
 
 export default useGame;

@@ -1,5 +1,8 @@
-const GameOverSceneRenderer = ({ scene, onChoice }) => {
+import { useNavigate } from "react-router-dom";
+
+const GameOverSceneRenderer = ({ scene, restartCurrentChapter }) => {
     const shot = scene?.shots?.[0] || null;
+    const navigate = useNavigate();
 
     return (
         <div id="scene-renderer" className="flex flex-col">
@@ -28,15 +31,18 @@ const GameOverSceneRenderer = ({ scene, onChoice }) => {
                 <p>{scene.text}</p>
             </div>
             <div>
-                {scene.choices.map((choice) => (
-                    <button
-                        key={choice.id}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
-                        onClick={() => onChoice(choice.id)}
-                    >
-                        {choice.text}
-                    </button>
-                ))}
+                <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
+                    onClick={() => restartCurrentChapter()}
+                >
+                    Recommencer le chapitre
+                </button>
+                <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
+                    onClick={() => navigate("/")}
+                >
+                    Retour à l'écran titre
+                </button>
             </div>
         </div>
     );
