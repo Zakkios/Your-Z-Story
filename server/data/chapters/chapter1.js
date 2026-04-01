@@ -1,5 +1,8 @@
 const chapter1 = {
-    id: "chapter1",
+    id: "1",
+    slug: "chapter1",
+    title: "Chapitre 1 : La rencontre avec Bulma",
+    startSceneId: "bulmaCar",
     scenes: {
         bulmaCar: {
             id: "bulmaCar",
@@ -36,13 +39,13 @@ const chapter1 = {
                 {
                     id: "0",
                     text: "Affronter la voiture pour protéger mon poisson",
-                    nextChapterId: "chapter1",
+                    nextChapterId: "1",
                     nextSceneId: "carFight"
                 },
                 {
                     id: "1",
                     text: "Prendre la fuite pour sauver mon poisson",
-                    nextChapterId: "chapter1",
+                    nextChapterId: "1",
                     nextSceneId: "carRun"
                 }
             ]
@@ -82,8 +85,8 @@ const chapter1 = {
                 {
                     id: "0",
                     text: "Continuer l’aventure",
-                    nextChapterId: "chapter2",
-                    nextSceneId: "nextChapter"
+                    nextChapterId: "2",
+                    nextSceneId: "nextScene"
                 }
             ]
         },
@@ -104,14 +107,14 @@ const chapter1 = {
                 {
                     id: "0",
                     text: "Recommencer le chapitre",
-                    nextChapterId: "chapter1",
+                    nextChapterId: "1",
                     nextSceneId: "bulmaCar"
                 },
                 {
                     id: "1",
                     text: "Abandonner et retourner à l'écran titre",
-                    nextChapterId: "chapter0",
-                    nextSceneId: "intro"
+                    nextChapterId: "0",
+                    nextSceneId: "0"
                 }
             ]
         }
