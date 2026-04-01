@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchScene, sendChoice } from '../services/api';
 
-const useGame = () => {
+const useGame = ({ chapterId, sceneId = null }) => {
     const [gameState, setGameState] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
     const [error, setError] = useState(null);
@@ -9,11 +9,12 @@ const useGame = () => {
     useEffect(() => {
         const load = async () => {
             try {
-                const data = await fetchScene("chapter0", "intro");
+                const data = await fetchScene(chapterId, sceneId);
                 if (!data || data.status !== 200) {
                     setError("Erreur lors du chargement de la scène. Veuillez réessayer plus tard.");
                     return;
                 }
+                console.log("Fetched scene data:", data);
                 const scene = data.scene;
                 setGameState(scene);
                 setIsGameOver(scene?.status === "gameover");
@@ -24,7 +25,7 @@ const useGame = () => {
         };
 
         load();
-    }, []);
+    }, [chapterId, sceneId]);
 
     const handleChoice = async (choiceId) => {
         const choice = gameState.choices.find((choice) => choice.id === choiceId);
