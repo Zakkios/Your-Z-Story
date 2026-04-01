@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { fetchScene, sendChoice } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const useGame = ({ chapterId, sceneId = null }) => {
     const [gameState, setGameState] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const load = async () => {
@@ -31,6 +33,11 @@ const useGame = ({ chapterId, sceneId = null }) => {
         const choice = gameState.choices.find((choice) => choice.id === choiceId);
         if (!choice) {
             setError("Une erreur s'est produite lors du traitement de votre choix. Veuillez réessayer plus tard.");
+            return;
+        }
+
+        if (choice.nextChapterId !== chapterId) {
+            navigate(`/chapter/${choice.nextChapterId}`);
             return;
         }
 
