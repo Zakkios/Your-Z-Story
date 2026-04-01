@@ -31,7 +31,7 @@ const SceneRenderer = ({ scene, onChoice }) => {
                 <h1 className="text-4xl mb-4">{scene.title}</h1>
             )}
             {
-                hasShots && displayedShot && (
+                hasShots && displayedShot && displayedShot.isImageType === "true" ? (
                     <div
                         id="shots"
                         className={`
@@ -53,19 +53,20 @@ const SceneRenderer = ({ scene, onChoice }) => {
                                 className={`
                         w-auto object-contain transition-all duration-500 ease-in-out
                         ${displayedShot.animation || ""}
-                        ${areShotsFinished ? "h-full max-h-[50vh]" : "max-h-[80vh]"}
+                        ${areShotsFinished ? "h-full max-h-[50vh]" : "max-h-[60vh]"}
                     `}
                             />
+                            <p dangerouslySetInnerHTML={{ __html: displayedShot.text }} className={`pt-4 ${areShotsFinished ? "hidden" : ""}`} />
                         </div>
                     </div>
+                ) : (
+                    <p dangerouslySetInnerHTML={{ __html: displayedShot.text }} />
                 )
             }
-
             {
                 areShotsFinished && (
                     <div id="scene-content">
-                        <p>{scene.text}</p>
-
+                        <p dangerouslySetInnerHTML={{ __html: scene.text }} />
                         <div>
                             {scene.choices.map((choice) => (
                                 <button
