@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Button from "../ui/Button";
 
 const SceneRenderer = ({ scene, onChoice }) => {
     const [currentShotIndex, setCurrentShotIndex] = useState(0);
@@ -28,7 +29,7 @@ const SceneRenderer = ({ scene, onChoice }) => {
     return (
         <div id="scene-renderer" className="flex flex-col">
             {areShotsFinished && (
-                <h1 className="text-4xl mb-4">{scene.title}</h1>
+                <h1 className="text-6xl max-md:text-4xl mb-4 bebas-neue">{scene.title}</h1>
             )}
             {
                 hasShots && displayedShot && displayedShot.isImageType === "true" ? (
@@ -51,31 +52,25 @@ const SceneRenderer = ({ scene, onChoice }) => {
                                 src={displayedShot.image}
                                 alt={displayedShot.title || "scene-shot"}
                                 className={`
-                        w-auto object-contain transition-all duration-500 ease-in-out
+                        bebas-neue w-auto object-contain transition-all duration-500 ease-in-out
                         ${displayedShot.animation || ""}
                         ${areShotsFinished ? "h-full max-h-[50vh]" : "max-h-[60vh]"}
                     `}
                             />
-                            <p dangerouslySetInnerHTML={{ __html: displayedShot.text }} className={`pt-4 ${areShotsFinished ? "hidden" : ""}`} />
+                            <p dangerouslySetInnerHTML={{ __html: displayedShot.text }} className={`pt-4 cc-wild-words-roman text-lg ${areShotsFinished ? "hidden" : ""}`} />
                         </div>
                     </div>
                 ) : (
-                    <p dangerouslySetInnerHTML={{ __html: displayedShot.text }} />
+                    <p className="cc-wild-words-roman text-xl" dangerouslySetInnerHTML={{ __html: displayedShot.text }} />
                 )
             }
             {
                 areShotsFinished && (
                     <div id="scene-content">
-                        <p dangerouslySetInnerHTML={{ __html: scene.text }} />
+                        <p className="cc-wild-words-roman text-lg" dangerouslySetInnerHTML={{ __html: scene.text }} />
                         <div>
                             {scene.choices.map((choice) => (
-                                <button
-                                    key={choice.id}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
-                                    onClick={() => onChoice(choice.id)}
-                                >
-                                    {choice.text}
-                                </button>
+                                <Button key={choice.id} text={choice.text} onClick={() => onChoice(choice.id)} />
                             ))}
                         </div>
                     </div>
@@ -85,20 +80,20 @@ const SceneRenderer = ({ scene, onChoice }) => {
             {
                 !areShotsFinished && (
                     <>
-                        <div className="absolute bottom-20 right-20">
+                        <div className="absolute bottom-0 right-10">
                             <button
-                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                className="bg-contain bg-no-repeat bg-center w-32 h-32 max-sm:w-24 max-sm:h-24 max-xs:w-20 max-xs:h-20"
+                                style={{ backgroundImage: "url('/images/kinto.png')" }}
                                 onClick={handleNext}
                             >
-                                Next
                             </button>
                         </div>
-                        <div className="absolute bottom-20 left-20">
+                        <div className="absolute bottom-0 left-10">
                             <button
-                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                className="bg-contain bg-no-repeat bg-center w-32 h-32 max-sm:w-24 max-sm:h-24 max-xs:w-20 max-xs:h-20 -scale-x-100"
+                                style={{ backgroundImage: "url('/images/kinto.png')" }}
                                 onClick={handlePrevious}
                             >
-                                Previous
                             </button>
                         </div>
                     </>

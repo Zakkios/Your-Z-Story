@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button from "../ui/Button";
 
 const GameOverSceneRenderer = ({ scene, restartCurrentChapter }) => {
     const shot = scene?.shots?.[0] || null;
@@ -6,7 +7,7 @@ const GameOverSceneRenderer = ({ scene, restartCurrentChapter }) => {
 
     return (
         <div id="scene-renderer" className="flex flex-col">
-            <h1 className="text-4xl">GameOver</h1>
+            <h1 className="bebas-neue text-6xl max-md:text-4xl mb-4">Game Over</h1>
             {
                 shot && (
                     <div
@@ -27,22 +28,13 @@ const GameOverSceneRenderer = ({ scene, restartCurrentChapter }) => {
                 )
             }
             <div id="scene-content">
-                <h1>{scene.title}</h1>
-                <p>{scene.text}</p>
+                <p className="cc-wild-words-roman text-lg mt-4" dangerouslySetInnerHTML={{ __html: scene.text }} />
             </div>
             <div>
-                <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
-                    onClick={() => restartCurrentChapter()}
-                >
-                    Recommencer le chapitre
-                </button>
-                <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
-                    onClick={() => navigate("/")}
-                >
-                    Retour à l'écran titre
-                </button>
+                <Button text="Recommencer le chapitre" onClick={() => restartCurrentChapter()} />
+                <Button text="Retour à l'écran titre" onClick={() => navigate("/")} />
+            </div>
+            <div>
             </div>
         </div>
     );
