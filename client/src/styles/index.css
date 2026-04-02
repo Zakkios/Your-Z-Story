@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'CC Wild Words Roman';
+  src: url(../assets/font/CC\ Wild\ Words\ Roman.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CC Wild Words Italic';
+  src: url(../assets/font/CC\ Wild\ Words\ Italic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CC Wild Words Bold Italic';
+  src: url(../assets/font/CC\ Wild\ Words\ Bold\ Italic.ttf) format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url(../assets/font/BebasNeue-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   overflow: hidden;
   margin: 0;
@@ -17,4 +45,21 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.cc-wild-words-roman {
+  font-family: 'CC Wild Words Roman', sans-serif;
+}
+
+.cc-wild-words-italic {
+  font-family: 'CC Wild Words Italic', sans-serif;
+}
+
+
+.cc-wild-words-bold-italic {
+  font-family: 'CC Wild Words Bold Italic', sans-serif;
+}
+
+.bebas-neue {
+  font-family: 'Bebas Neue', sans-serif;
 }
