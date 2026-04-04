@@ -1,28 +1,35 @@
 import gameData from '../data/gameData.js';
 
-export const gameState = (req, res) => {
-    const { chapterId, sceneId } = req.params;
+export const gameState = (c) => {
+    const { chapterId, sceneId } = c.req.param();
     const chapter = gameData.chapters[chapterId];
 
     if (!chapter) {
-        return res.status(404).json({ error: 'Chapter not found' });
+        return c.json({ error: 'Chapter not found' }, 404);
     }
 
     const scene = chapter.scenes[sceneId] || chapter.scenes[chapter.startSceneId];
 
     if (!scene) {
-        return res.status(404).json({ error: 'Scene not found' });
+        return c.json({ error: 'Scene not found' }, 404);
     }
-    return res.json(scene);
-}
 
-export const makeChoice = (req, res) => {
-    const choice = req.body;
-    const newScene = gameData.chapters[choice.chapterId].scenes[choice.sceneId];
+    return c.json(scene);
+};
+
+export const makeChoice = async (c) => {
+    const choice = await c.req.json();
+    const chapter = gameData.chapters[choice.chapterId];
+
+    if (!chapter) {
+        return c.json({ error: 'Chapter not found' }, 404);
+    }
+
+    const newScene = chapter.scenes[choice.sceneId];
 
     if (!newScene) {
-        return res.status(404).json({ error: 'Next scene not found' });
+        return c.json({ error: 'Next scene not found' }, 404);
     }
 
-    return res.json(newScene);
-}
+    return c.json(newScene);
+};

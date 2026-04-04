@@ -1,5 +1,3 @@
-import { text } from "express";
-
 const chapter1 = {
     id: "1",
     slug: "chapter1",
