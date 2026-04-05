@@ -1,16 +1,33 @@
 import { useEffect, useState } from "react";
 import Button from "../ui/Button";
+import preloadImages from "../../services/preloadImages";
+import Loading from "../ui/Loading";
 
 const SceneRenderer = ({ scene, onChoice }) => {
     const [currentShotIndex, setCurrentShotIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setCurrentShotIndex(0);
+        setIsLoading(true);
+        const imagesUrls = scene?.shots
+            .filter((shot) => shot.isImageType === "true" && shot.image)
+            .map((shot) => shot.image) ?? [];
+        preloadImages(imagesUrls).then(() => {
+            setIsLoading(false);
+        }).catch((error) => {
+            console.error("Error preloading images:", error);
+            setIsLoading(false);
+        });
+    }, [scene]);
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     const shots = scene?.shots || [];
     const hasShots = shots.length > 0;
     const areShotsFinished = !hasShots || currentShotIndex >= shots.length;
-
-    useEffect(() => {
-        setCurrentShotIndex(0);
-    }, [scene]);
 
     const handleNext = () => {
         if (!hasShots) return;
@@ -57,17 +74,17 @@ const SceneRenderer = ({ scene, onChoice }) => {
                         ${areShotsFinished ? "h-full max-h-[50vh]" : "max-h-[60vh]"}
                     `}
                             />
-                            <p dangerouslySetInnerHTML={{ __html: displayedShot.text }} className={`pt-4 cc-wild-words-roman text-lg ${areShotsFinished ? "hidden" : ""}`} />
+                            <p dangerouslySetInnerHTML={{ __html: displayedShot.text }} className={`pt-4 cc-wild-words-roman text-lg max-md:text-sm ${areShotsFinished ? "hidden" : ""}`} />
                         </div>
                     </div>
                 ) : (
-                    <p className="cc-wild-words-roman text-xl" dangerouslySetInnerHTML={{ __html: displayedShot.text }} />
+                    <p className="cc-wild-words-roman text-xl max-md:text-base" dangerouslySetInnerHTML={{ __html: displayedShot.text }} />
                 )
             }
             {
                 areShotsFinished && (
                     <div id="scene-content">
-                        <p className="cc-wild-words-roman text-lg" dangerouslySetInnerHTML={{ __html: scene.text }} />
+                        <p className="cc-wild-words-roman text-lg max-md:text-sm" dangerouslySetInnerHTML={{ __html: scene.text }} />
                         <div>
                             {scene.choices.map((choice) => (
                                 <Button key={choice.id} text={choice.text} onClick={() => onChoice(choice.id)} />
