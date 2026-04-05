@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useGame from "../hooks/useGame";
 import GameOverSceneRenderer from "../components/game/GameOverSceneRenderer";
 import SceneRenderer from "../components/game/SceneRenderer";
+import Loading from "../components/ui/Loading";
 
 const ChapterPage = () => {
     const { chapterId } = useParams();
@@ -12,10 +13,7 @@ const ChapterPage = () => {
     }
 
     if (!gameState) {
-        return <div>
-            <img src="/images/loading.png" alt="Chargement" className="animate-spin max-h-[20vh]" />
-            <p className="pt-4">Chargement...</p>
-        </div>;
+        return <Loading />;
     }
 
     return (
