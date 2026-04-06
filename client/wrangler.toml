@@ -1,5 +1,5 @@
-name = "yourzstory"
-compatibility_date = "2026-04-04"
+name = "goku-den"
+compatibility_date = "2026-04-06"
 [assets]
 directory = "./build"
 not_found_handling = "single-page-application"
