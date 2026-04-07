@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { fetchScene, sendChoice } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { saveLastChapterId } from '../services/gameProgress';
 
 const useGame = ({ chapterId, sceneId = null }) => {
     const [gameState, setGameState] = useState(null);
@@ -22,6 +23,7 @@ const useGame = ({ chapterId, sceneId = null }) => {
             }
 
             const scene = data.scene;
+            saveLastChapterId(chapterId);
             setGameState(scene);
             setIsGameOver(scene?.status === "gameover");
         } catch (err) {
@@ -43,6 +45,7 @@ const useGame = ({ chapterId, sceneId = null }) => {
         }
 
         if (choice.nextChapterId !== chapterId) {
+            saveLastChapterId(choice.nextChapterId);
             navigate(`/chapter/${choice.nextChapterId}`);
             return;
         }
@@ -65,6 +68,7 @@ const useGame = ({ chapterId, sceneId = null }) => {
             }
 
             const scene = data.scene;
+            saveLastChapterId(chapterId);
             setGameState(scene);
             setIsGameOver(scene?.status === "gameover");
         } catch (err) {
