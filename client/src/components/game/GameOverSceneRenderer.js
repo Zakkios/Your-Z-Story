@@ -28,7 +28,7 @@ const GameOverSceneRenderer = ({ scene, restartCurrentChapter }) => {
                 )
             }
             <div id="scene-content">
-                <p className="cc-wild-words-roman text-lg mt-4" dangerouslySetInnerHTML={{ __html: scene.text }} />
+                <p className="cc-wild-words-roman text-lg max-md:text-sm mt-4" dangerouslySetInnerHTML={{ __html: scene.text }} />
             </div>
             <div>
                 <Button text="Recommencer le chapitre" onClick={() => restartCurrentChapter()} />
