@@ -8,13 +8,14 @@ export const gameState = (c) => {
         return c.json({ error: 'Chapter not found' }, 404);
     }
 
+    const chapterTitle = chapter.title;
     const scene = chapter.scenes[sceneId] || chapter.scenes[chapter.startSceneId];
 
     if (!scene) {
         return c.json({ error: 'Scene not found' }, 404);
     }
 
-    return c.json(scene);
+    return c.json({ status: 200, scene, chapterTitle });
 };
 
 export const makeChoice = async (c) => {
