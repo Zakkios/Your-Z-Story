@@ -13,7 +13,8 @@ export const fetchScene = async (chapterId, sceneId) => {
     const codeStatus = response.status;
 
     return {
-        scene: responseJson,
+        scene: responseJson.scene,
+        chapterTitle: responseJson.chapterTitle,
         status: codeStatus
     };
 };

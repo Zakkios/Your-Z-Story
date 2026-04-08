@@ -6,6 +6,8 @@ import { saveLastChapterId } from '../services/gameProgress';
 const useGame = ({ chapterId, sceneId = null }) => {
     const [gameState, setGameState] = useState(null);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [isNewChapter, setIsNewChapter] = useState(true);
+    const [chapterTitle, setChapterTitle] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -20,6 +22,10 @@ const useGame = ({ chapterId, sceneId = null }) => {
             if (!data || data.status !== 200) {
                 setError("Erreur lors du chargement de la scène. Veuillez réessayer plus tard.");
                 return;
+            }
+
+            if (data.chapterTitle) {
+                setChapterTitle(data.chapterTitle);
             }
 
             const scene = data.scene;
@@ -46,9 +52,12 @@ const useGame = ({ chapterId, sceneId = null }) => {
 
         if (choice.nextChapterId !== chapterId) {
             saveLastChapterId(choice.nextChapterId);
+            setIsNewChapter(true);
             navigate(`/chapter/${choice.nextChapterId}`);
             return;
         }
+
+        setIsNewChapter(false);
 
         const payload = {
             chapterId: choice.nextChapterId,
@@ -81,7 +90,7 @@ const useGame = ({ chapterId, sceneId = null }) => {
         await load();
     };
 
-    return { gameState, isGameOver, error, handleChoice, restartCurrentChapter };
+    return { gameState, chapterTitle, isNewChapter, isGameOver, error, handleChoice, restartCurrentChapter };
 };
 
 export default useGame;
