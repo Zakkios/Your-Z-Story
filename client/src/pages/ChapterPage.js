@@ -30,7 +30,7 @@ const ChapterPage = () => {
 
     return (
         <>
-            <div className={`absolute flex justify-center items-center min-h-[100vh] min-w-[100vw] z-10 ${showTitle ? "opacity-100" : "opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out"}`}>
+            <div className={`absolute flex justify-center items-center min-h-[100dvh] min-w-[100dvw] inset-0 z-10 ${showTitle ? "opacity-100" : "opacity-0 pointer-events-none transition-opacity duration-700 ease-in-out"}`}>
                 <ChapterTitleRender title={chapterTitle} />
             </div>
 
