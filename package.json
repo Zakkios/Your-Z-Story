@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npx wrangler dev",
-    "client": "cd client && npm start",
+    "client": "cd client && npm run build && npx wrangler dev",
     "deploy": "cd client && npm run deploy && cd ../server && npm run deploy"
   },
   "devDependencies": {
