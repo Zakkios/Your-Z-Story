@@ -7,8 +7,7 @@ const chapter2 = {
         mysteriousTurtle: {
             id: "",
             title: "La mysterieuse tortue",
-            text: "Tu arrives dans la ville et tu découvres un monde nouveau !",
-            status: "ongoing",
+            text: `<span class="cc-wild-words-italic">Pauvre tortue, elle en a vu de toutes les couleurs...</span> <br/>120km, c'est une sacree distance pour une tortue. <br/><span class="cc-wild-words-bold-italic">Goku n'a jamais vu cette "mer" dont elle parle.</span> <br/>Ca pourrait etre dangereux ?`, status: "ongoing",
             shots: [
                 {
                     id: "shot1",
@@ -61,6 +60,14 @@ const chapter2 = {
                 {
                     id: "shot7",
                     image: "/images/chapter2/mysterious-turtle/7.png",
+                    text: "",
+                    animation: "",
+                    transition: "",
+                    isImageType: "true"
+                },
+                {
+                    id: "shot8",
+                    image: "/images/chapter2/mysterious-turtle/8.png",
                     text: "",
                     animation: "",
                     transition: "",
