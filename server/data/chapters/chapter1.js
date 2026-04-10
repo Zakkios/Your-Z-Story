@@ -115,7 +115,7 @@ const chapter1 = {
                 {
                     id: "shot7",
                     image: "",
-                    text: `<span class="cc-wild-words-italic">Goku rencontre Bulma pour la premiere fois.</span> Depuis la mort de son grand-pere, il a toujours vecu seul… <span class="cc-wild-words-bold-italic">c’est meme la premiere humaine qu’il rencontre.</span> <br/><span class="cc-wild-words-italic">Leur echange est… plutot etrange.</span> Sans trop se poser de questions, Goku decide de l’emmener chez lui. <br/>À l’interieur, un objet d’un <span class="cc-wild-words-bold-italic">orange brillant</span> attire immediatement l’attention de <span class="cc-wild-words-bold-italic">Bulma</span>.`,
+                    text: `<span class="cc-wild-words-italic">Goku rencontre Bulma pour la premiere fois.</span> Depuis la mort de son grand-pere, il a toujours vecu seul… <span class="cc-wild-words-bold-italic">c’est meme la premiere humaine qu’il rencontre.</span> <br/><span class="cc-wild-words-italic">Leur echange est… plutot etrange.</span> Sans trop se poser de questions, Goku decide de l’emmener chez lui. <br/>A l’interieur, un objet d’un <span class="cc-wild-words-bold-italic">orange brillant</span> attire immediatement l’attention de <span class="cc-wild-words-bold-italic">Bulma</span>.`,
                     animation: "",
                     transition: "",
                     isImageType: "false"
@@ -168,7 +168,7 @@ const chapter1 = {
             shots: [
                 {
                     id: "shot1",
-                    image: "/images/chapter1/car-run/1.png",
+                    image: "/images/gameover/1.png",
                     text: "",
                     animation: "",
                     transition: "",
@@ -198,7 +198,7 @@ const chapter1 = {
             shots: [
                 {
                     id: "shot1",
-                    image: "/images/chapter1/car-run/1.png",
+                    image: "/images/gameover/1.png",
                     text: "",
                     animation: "",
                     transition: "",
